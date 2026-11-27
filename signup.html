@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChessArena | Create Account</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #080D1C;
+      color: white;
+      padding: 20px;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 35px;
+      background: #101B35;
+      border: 1px solid #263657;
+      border-radius: 16px;
+      box-shadow: 0 15px 45px #0008;
+    }
+
+    .logo {
+      text-align: center;
+      color: #D4AF37;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aab8d0;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #35476a;
+      background: #080D1C;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #126BFF;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #126BFF;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0054db;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 22px;
+      color: #aab8d0;
+      font-size: 14px;
+    }
+
+    a {
+      color: #00C8FF;
+      text-decoration: none;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #aab8d0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="auth-container">
+
+    <div class="logo">♟ ChessArena</div>
+
+    <h2>Create Your Account</h2>
+
+    <p class="subtitle">
+      Join ChessArena and start your chess journey.
+    </p>
+
+    <form id="signup-form">
+
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Choose a username"
+        minlength="3"
+        maxlength="20"
+        pattern="[A-Za-z0-9_]+"
+        required
+      >
+
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="At least 8 characters"
+        minlength="8"
+        maxlength="72"
+        required
+      >
+
+      <button type="submit" id="signup-button">
+        Create Account
+      </button>
+
+      <p id="message" role="status"></p>
+
+    </form>
+
+    <p class="login-link">
+      Already have an account?
+      <a href="login.html">Login</a>
+    </p>
+
+    <a href="index.html" class="back-link">
+      ← Back to ChessArena
+    </a>
+
+  </div>
+
+  <script src="auth.js"></script>
+
+  <script>
+    const signupForm = document.getElementById("signup-form");
+    const message = document.getElementById("message");
+    const signupButton = document.getElementById("signup-button");
+
+    signupForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      signupButton.disabled = true;
+      signupButton.textContent = "Creating account...";
+      message.textContent = "";
+
+      try {
+        const result = await registerUser(username, email, password);
+
+        message.style.color = "#4ade80";
+        message.textContent = result.message;
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+
+      } catch (error) {
+        message.style.color = "#f87171";
+        message.textContent = error.message;
+      } finally {
+        signupButton.disabled = false;
+        signupButton.textContent = "Create Account";
+      }
+    });
+  </script>
+
+</body>
+</html>

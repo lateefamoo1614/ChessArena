@@ -1,1 +1,252 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080D1C">
+
+  <title>ChessArena | Think Smart. Play Bold.</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- CHESS LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script>
+
+  <!-- SOCKET.IO -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- MAIN JAVASCRIPT -->
+  <script src="script.js" defer></script>
+
+  <!-- AUTHENTICATION JAVASCRIPT -->
+  <script src="auth.js" defer></script>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+
+    <a href="/" class="logo">♟ Chess<span>Arena</span></a>
+
+    <nav>
+      <a href="#arena">Play</a>
+      <a href="#blitz-challenge">Challenge</a>
+      <a href="#tournaments">Tournaments</a>
+      <a href="#leaderboard">Leaderboard</a>
+    </nav>
+
+    <!-- LOGIN / SIGNUP / USER ACCOUNT -->
+    <div class="nav-buttons">
+
+      <button
+        class="login-btn"
+        id="login-btn"
+        type="button">
+        Log In
+      </button>
+
+      <button
+        class="signup-btn"
+        id="signup-btn"
+        type="button">
+        Sign Up
+      </button>
+
+    </div>
+
+  </header>
+
+  <main id="home">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <h1>
+          Think Smart.<br>
+          Play <span>Bold.</span>
+        </h1>
+
+        <p>
+          Challenge players. Improve your game. Become a champion.
+        </p>
+
+        <button
+          class="primary-btn"
+          id="playNow"
+          type="button">
+          Play Chess
+        </button>
+
+      </div>
+
+      <div class="hero-king">♚</div>
+
+    </section>
+
+    <!-- GAME MODES -->
+    <section class="game-modes" id="arena">
+
+      <h2>Choose Your Game</h2>
+
+      <p>Select a time control and find an opponent.</p>
+
+      <div class="game-modes-container">
+
+        <!-- BULLET -->
+        <div class="mode-card">
+
+          <h3>Bullet</h3>
+
+          <p>Fast games. Fast decisions.</p>
+
+          <select id="bullet-time">
+            <option value="60+0">1 + 0</option>
+            <option value="120+0">2 + 0</option>
+            <option value="120+1">2 + 1</option>
+          </select>
+
+          <button
+            type="button"
+            onclick="startSelectedGame('bullet')">
+            Play Bullet
+          </button>
+
+        </div>
+
+        <!-- BLITZ -->
+        <div class="mode-card">
+
+          <h3>Blitz</h3>
+
+          <p>Quick thinking. Sharp tactics.</p>
+
+          <select id="blitz-time">
+            <option value="180+0">3 + 0</option>
+            <option value="180+2">3 + 2</option>
+            <option value="300+0">5 + 0</option>
+            <option value="300+3">5 + 3</option>
+          </select>
+
+          <button
+            type="button"
+            onclick="startSelectedGame('blitz')">
+            Play Blitz
+          </button>
+
+        </div>
+
+        <!-- RAPID -->
+        <div class="mode-card">
+
+          <h3>Rapid</h3>
+
+          <p>More time. Deeper strategy.</p>
+
+          <select id="rapid-time">
+            <option value="600+0">10 + 0</option>
+            <option value="600+5">10 + 5</option>
+            <option value="900+10">15 + 10</option>
+            <option value="1800+0">30 + 0</option>
+          </select>
+
+          <button
+            type="button"
+            onclick="startSelectedGame('rapid')">
+            Play Rapid
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FRIEND CHALLENGE -->
+    <section
+      class="challenge-section"
+      id="blitz-challenge">
+
+      <h2>Challenge a Friend</h2>
+
+      <div class="challenge-card">
+
+        <label for="challenge-mode">
+          Game mode
+        </label>
+
+        <select id="challenge-mode">
+          <option value="bullet">Bullet</option>
+          <option value="blitz" selected>Blitz</option>
+          <option value="rapid">Rapid</option>
+        </select>
+
+        <label for="challenge-time">
+          Time control
+        </label>
+
+        <select id="challenge-time">
+          <option value="60+0">1 + 0</option>
+          <option value="180+0">3 + 0</option>
+          <option value="300+0" selected>5 + 0</option>
+          <option value="600+0">10 + 0</option>
+          <option value="900+10">15 + 10</option>
+        </select>
+
+        <button
+          id="createChallengeBtn"
+          type="button">
+          Create Challenge
+        </button>
+
+        <div
+          id="challenge-result"
+          aria-live="polite">
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TOURNAMENTS -->
+    <section class="features" id="tournaments">
+
+      <h2>Tournaments</h2>
+
+      <p>Compete with other ChessArena players.</p>
+
+      <p>Coming Soon</p>
+
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section
+      class="leaderboard-section"
+      id="leaderboard">
+
+      <h2>Leaderboard</h2>
+
+      <p>Discover the best ChessArena players.</p>
+
+      <p>Coming Soon</p>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="logo">
+      ♟ Chess<span>Arena</span>
+    </div>
+
+    <p>© 2026 ChessArena</p>
+
+  </footer>
+
+</body>
+</html>
